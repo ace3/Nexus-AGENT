@@ -495,6 +495,73 @@ To add custom agents:
 
 See existing agents as templates.
 
+## 🔌 Universal Skills Directory
+
+The `skills/` directory provides Nexus as a **universal skill format** that works across multiple AI coding tools.
+
+### Skill Format
+
+Each skill is a `SKILL.md` file with YAML frontmatter (`name`, `description`) and markdown body. Heavy content lives in `references/` files loaded on demand.
+
+### Skill Inventory
+
+| Skill | Directory | Description |
+|-------|-----------|-------------|
+| `nexus` | `skills/nexus/` | Main orchestrator — 4-phase workflow, agent roster, status protocol |
+| `nexus-build` | `skills/nexus-build/` | Build a new feature (research → design → TDD execute → validate) |
+| `nexus-debug` | `skills/nexus-debug/` | Debug and fix bugs (research → fix with 3 debug cycles → validate) |
+| `nexus-review` | `skills/nexus-review/` | Code review (research → two-stage review with 7-category scoring) |
+| `nexus-refactor` | `skills/nexus-refactor/` | Refactor code (dependency map → plan → execute → validate behavior) |
+| `nexus-test` | `skills/nexus-test/` | Add tests (find coverage gaps → write tests → validate quality) |
+| `nexus-docs` | `skills/nexus-docs/` | Write documentation (research → document → verify accuracy) |
+
+### Installation by Tool
+
+**Claude Code:**
+```bash
+# Symlink into Claude Code skills directory
+mkdir -p ~/.claude/skills
+ln -s "$(pwd)/skills/nexus" ~/.claude/skills/nexus
+ln -s "$(pwd)/skills/nexus-build" ~/.claude/skills/nexus-build
+ln -s "$(pwd)/skills/nexus-debug" ~/.claude/skills/nexus-debug
+ln -s "$(pwd)/skills/nexus-review" ~/.claude/skills/nexus-review
+ln -s "$(pwd)/skills/nexus-refactor" ~/.claude/skills/nexus-refactor
+ln -s "$(pwd)/skills/nexus-test" ~/.claude/skills/nexus-test
+ln -s "$(pwd)/skills/nexus-docs" ~/.claude/skills/nexus-docs
+```
+
+**GitHub Copilot:**
+```bash
+# Copy SKILL.md files as .agent.md into VS Code prompts directory (adapt content as needed)
+# Skills are tool-agnostic, so the instructions work across agents
+```
+
+**OpenAI Codex / OpenCode:**
+```bash
+# Symlink into .agents/skills/ directory
+mkdir -p .agents/skills
+ln -s "$(pwd)/skills/nexus" .agents/skills/nexus
+# Repeat for each pipeline skill
+```
+
+### Directory Structure
+
+```
+skills/
+├── nexus/                      # Main orchestrator
+│   ├── SKILL.md                # Entry point
+│   └── references/
+│       ├── agents.md           # Full agent definitions
+│       ├── pipelines.md        # Pipeline workflows
+│       └── protocols.md        # Status protocol, evidence gates, debug protocol
+├── nexus-build/SKILL.md        # Build feature pipeline
+├── nexus-debug/SKILL.md        # Debug & fix pipeline
+├── nexus-review/SKILL.md       # Code review pipeline
+├── nexus-refactor/SKILL.md     # Refactor pipeline
+├── nexus-test/SKILL.md         # Add tests pipeline
+└── nexus-docs/SKILL.md         # Write docs pipeline
+```
+
 ## 📄 License
 
 MIT License - See LICENSE file
