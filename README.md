@@ -18,7 +18,7 @@ A streamlined multi-agent orchestration system for VS Code Copilot that executes
 ### Main Orchestrator
 
 **Nexus** (`Nexus.agent.md`) - THE AUTONOMOUS ORCHESTRATOR
-- Model: Claude Sonnet 4.5
+- Model: Claude Sonnet 4.6
 - Plans complete execution strategy
 - Delegates to specialized sub-agents
 - Coordinates parallel execution
@@ -35,28 +35,28 @@ A streamlined multi-agent orchestration system for VS Code Copilot that executes
    - Returns structured file lists
 
 2. **Analyst-subagent** (`Analyst-subagent.agent.md`) - THE ARCHITECTURE EXPERT
-   - Model: GPT-5.2
+   - Model: GPT-5.4
    - Deep architecture analysis
    - Pattern identification
    - Constraint documentation
    - Strategic recommendations
 
 3. **Builder-subagent** (`Builder-subagent.agent.md`) - THE TDD IMPLEMENTER
-   - Model: Claude Sonnet 4.5
+   - Model: Claude Sonnet 4.6
    - Strict TDD workflow
    - Test first, always
    - Production-ready code
    - Lint and format
 
 4. **Reviewer-subagent** (`Reviewer-subagent.agent.md`) - THE QUALITY GATEKEEPER
-   - Model: GPT-5.2
+   - Model: GPT-5.4
    - Code quality review
    - Security audit
    - Test coverage check
    - APPROVED/NEEDS_REVISION/FAILED
 
 5. **Tester-subagent** (`Tester-subagent.agent.md`) - THE VALIDATION SPECIALIST
-   - Model: Claude Sonnet 4.5
+   - Model: Claude Sonnet 4.6
    - Test execution
    - Coverage reporting
    - Failure analysis
@@ -202,12 +202,12 @@ By default, Nexus uses up to 10 parallel agents per phase. This is configured in
 
 Each agent uses a specific model optimized for its role:
 
-- **Nexus**: Claude Sonnet 4.5 (orchestration reasoning)
+- **Nexus**: Claude Sonnet 4.6 (orchestration reasoning)
 - **Scout**: Gemini 3 Flash (speed for discovery)
-- **Analyst**: GPT-5.2 (deep analysis)
-- **Builder**: Claude Sonnet 4.5 (code quality)
-- **Reviewer**: GPT-5.2 (thoroughness)
-- **Tester**: Claude Sonnet 4.5 (execution)
+- **Analyst**: GPT-5.4 (deep analysis)
+- **Builder**: Claude Sonnet 4.6 (code quality)
+- **Reviewer**: GPT-5.4 (thoroughness)
+- **Tester**: Claude Sonnet 4.6 (execution)
 
 These can be changed in the YAML frontmatter of each `.agent.md` file.
 

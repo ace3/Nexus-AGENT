@@ -2,7 +2,7 @@
 description: 'TDD-driven implementation specialist - writes production code with tests first'
 argument-hint: 'What to implement (e.g., "implement JWT token generation with tests")'
 tools: ['edit', 'search', 'view', 'runCommands', 'runTasks']
-model: Claude Sonnet 4.5 (copilot)
+model: Claude Sonnet 4.6 (copilot)
 ---
 
 # BUILDER - THE TDD IMPLEMENTER

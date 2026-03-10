@@ -260,7 +260,7 @@ PHASE 1: RESEARCH (Parallel)
 
 ### Change Model (in .agent.md file)
 ```yaml
-model: Claude Sonnet 4.5 (copilot)  # Change to your preference
+model: Claude Sonnet 4.6 (copilot)  # Change to your preference
 ```
 
 ### Adjust Parallel Limits (in Nexus.agent.md)

@@ -2,7 +2,7 @@
 description: 'Test execution and validation specialist - runs tests and reports results'
 argument-hint: 'What to test (e.g., "run all authentication tests")'
 tools: ['runCommands', 'runTasks', 'view']
-model: Claude Sonnet 4.5 (copilot)
+model: Claude Sonnet 4.6 (copilot)
 ---
 
 # TESTER - THE VALIDATION SPECIALIST

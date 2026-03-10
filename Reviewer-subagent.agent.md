@@ -2,7 +2,7 @@
 description: 'Code quality and correctness reviewer - ensures production readiness'
 argument-hint: 'What to review (e.g., "review JWT authentication implementation")'
 tools: ['view', 'search', 'usages']
-model: GPT-5.2 (copilot)
+model: GPT-5.4 (copilot)
 ---
 
 # REVIEWER - THE QUALITY GATEKEEPER

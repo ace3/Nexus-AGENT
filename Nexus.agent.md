@@ -2,7 +2,7 @@
 description: 'Autonomous orchestrator that plans and executes complete solutions with parallel sub-agent coordination'
 argument-hint: 'Development task to plan and execute (e.g., "Add user authentication")'
 tools: ['agent', 'search', 'usages', 'edit', 'runCommands', 'runTasks']
-model: Claude Sonnet 4.5 (copilot)
+model: Claude Sonnet 4.6 (copilot)
 ---
 
 # NEXUS - THE AUTONOMOUS ORCHESTRATOR

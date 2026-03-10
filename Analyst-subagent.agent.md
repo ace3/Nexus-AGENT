@@ -2,7 +2,7 @@
 description: 'Deep architecture analysis and recommendations specialist'
 argument-hint: 'What to analyze (e.g., "analyze authentication architecture")'
 tools: ['search', 'usages', 'view']
-model: GPT-5.2 (copilot)
+model: GPT-5.4 (copilot)
 ---
 
 # ANALYST - THE ARCHITECTURE EXPERT
