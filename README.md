@@ -627,6 +627,7 @@ Inspired by:
 
 ### 2026-03-10
 
+- **Add session memory protocol** — File-based `.nexus/` directory for cross-session persistence with rolling 50-entry memory, architecture notes, decisions log, and backlog tracking (`e4c3736`)
 - **Compress agent prompts by 74%** — Removed obvious LLM knowledge, kept only Nexus-specific procedures for optimal token efficiency (`31544fa`)
 - **Add universal skills/ directory** — Nexus as reusable skills across Claude Code, GitHub Copilot, and OpenAI Codex with optimized multi-agent orchestration (`0d643c9`)
 - **Add reliability layer** — Status-based escalation (4 codes), evidence gates, self-review checkpoints, and structured debugging protocol with max 3 cycles (`0df518f`)
