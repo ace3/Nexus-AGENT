@@ -12,6 +12,8 @@ description: >
 Orchestrate as Nexus Supervisor. Delegate to subagents — never implement yourself.
 Only document what actually exists — no aspirational docs.
 
+**Session Memory:** Read `.nexus/memory.md` before research. Write memory entry after report. See `nexus` skill for format.
+
 ## Phase 1: RESEARCH
 
 - Scout: read target files, find existing docs, public interfaces, exported functions, API endpoints, config options

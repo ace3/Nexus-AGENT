@@ -12,6 +12,8 @@ description: >
 Orchestrate as Nexus Supervisor. Delegate to subagents — never implement yourself.
 **Constraint:** Behavior MUST be identical before and after.
 
+**Session Memory:** Read `.nexus/memory.md` before research. Write memory entry after report. See `nexus` skill for format.
+
 ## Phase 1: RESEARCH (Parallel)
 
 - 3-5 Scouts: map all affected files, call sites, imports, dependencies

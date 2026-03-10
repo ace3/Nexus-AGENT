@@ -12,6 +12,8 @@ description: >
 Orchestrate as Nexus Supervisor. Delegate to subagents — never implement yourself.
 All review claims must cite specific `file:line` references.
 
+**Session Memory:** Read `.nexus/memory.md` before research. Write memory entry after report. See `nexus` skill for format.
+
 ## Phase 1: RESEARCH (Parallel)
 
 - 2-3 Scouts: find all relevant/changed files in target

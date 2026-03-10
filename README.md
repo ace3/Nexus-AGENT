@@ -330,6 +330,24 @@ Phase 4: Validation (two-stage)
 - ✅ Linting and formatting
 - ✅ Type hints and documentation
 
+### 7. Session Memory
+
+**Problem**: Each invocation starts cold — no knowledge of prior decisions, patterns, or unfinished work.
+
+**Solution**: File-based persistence in `.nexus/` at the project root:
+
+```
+.nexus/
+├── memory.md       # Rolling log of last 50 sessions (auto-pruned)
+├── architecture.md # Discovered patterns, conventions, tech stack
+├── decisions.md    # Key decisions with rationale and date
+└── backlog.md      # Unfinished work and follow-ups
+```
+
+**How it works**: Nexus reads all four files before Phase 1 to load prior context. After the final report, it appends a structured entry to `memory.md` and updates the other files with any new findings. The directory is created automatically on first run.
+
+**Result**: Continuity across sessions — Nexus remembers your conventions, prior choices, and open items without re-discovering them every time.
+
 ## 📊 Comparison to Alternatives
 
 ### vs Atlas (Original)
@@ -481,7 +499,7 @@ Don't interrupt - Nexus will:
 
 1. **Requires VS Code Insiders** - Best support for agent features
 2. **GitHub Copilot subscription** - Multi-agent support needed
-3. **No memory between sessions** - Each invocation is independent
+3. **Memory between sessions requires `.nexus/` directory** — auto-created on first run
 4. **Context window limits** - Very large codebases may hit limits
 5. **Model availability** - Requires access to specified models
 

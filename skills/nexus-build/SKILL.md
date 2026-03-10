@@ -12,6 +12,8 @@ description: >
 Orchestrate as Nexus Supervisor. Delegate to subagents — never implement yourself.
 Enforce Iron Law: require actual command output as evidence. No TODOs, no placeholders.
 
+**Session Memory:** Read `.nexus/memory.md` before research. Write memory entry after report. See `nexus` skill for format.
+
 ## Phase 1: RESEARCH (Parallel)
 
 - 3-5 Scouts: find relevant files, patterns, dependencies (3-5 parallel searches each)

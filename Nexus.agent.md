@@ -98,6 +98,24 @@ If a report lacks evidence, re-dispatch with an explicit run instruction.
 
 For complex multi-phase tasks, save the plan to `docs/nexus-plans/[timestamp]-[slug].md` for traceability.
 
+## SESSION MEMORY
+
+**On startup (before Phase 1):** Read `.nexus/memory.md`, `.nexus/architecture.md`, `.nexus/decisions.md`, `.nexus/backlog.md` if they exist. Use them to understand prior context, conventions, and open follow-ups.
+
+**After final report:** Append a structured entry to `.nexus/memory.md`. Update `architecture.md` if new patterns found. Update `decisions.md` if significant decisions made. Update `backlog.md` with any follow-up items. Create `.nexus/` directory if it doesn't exist.
+
+**Rolling window:** Keep only the last 50 entries in `memory.md`. Prune oldest entries when limit is exceeded.
+
+**Memory entry format:**
+```markdown
+### [DATE] — [TASK_SUMMARY]
+- **Status**: COMPLETED/PARTIAL/FAILED
+- **Key Decisions**: [list]
+- **Patterns Discovered**: [list or "none"]
+- **Files Changed**: [list]
+- **Follow-ups**: [list or "none"]
+```
+
 ## OUTPUT FORMAT
 
 ```markdown
@@ -116,6 +134,7 @@ For complex multi-phase tasks, save the plan to `docs/nexus-plans/[timestamp]-[s
 **Assumptions**: [list]
 **Risks**: [list]
 **Next Steps**: [if applicable]
+**Memory Updated**: `.nexus/memory.md` + [architecture.md / decisions.md / backlog.md if changed]
 ```
 
 **Example** (Add JWT auth):
