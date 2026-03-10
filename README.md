@@ -9,9 +9,10 @@ A streamlined multi-agent orchestration system for VS Code Copilot that executes
 **Execute complete, production-ready solutions immediately. Test until passing. No clarifications unless critical.**
 
 - ✅ **Autonomous Planning** - Plans and executes in one request
-- ✅ **Parallel Execution** - Up to 10 agents working simultaneously  
+- ✅ **Parallel Execution** - Up to 10 agents working simultaneously
 - ✅ **Test-Driven** - Strict TDD (red-green-refactor) enforced
 - ✅ **No User Prompts** - Agent mode from start to finish
+- ✅ **Reliability Layer** - Status-based escalation, evidence gates, self-review checkpoints
 
 ## 📋 Agent Architecture
 
@@ -22,6 +23,8 @@ A streamlined multi-agent orchestration system for VS Code Copilot that executes
 - Plans complete execution strategy
 - Delegates to specialized sub-agents
 - Coordinates parallel execution
+- Routes subagent status codes (`DONE` / `DONE_WITH_CONCERNS` / `NEEDS_CONTEXT` / `BLOCKED`)
+- Enforces evidence-based verification gates
 - Validates and reports results
 - **No user approval gates** - fully autonomous
 
@@ -32,35 +35,33 @@ A streamlined multi-agent orchestration system for VS Code Copilot that executes
    - Rapid file/usage discovery
    - **ALWAYS** 3-5 parallel searches
    - Read-only exploration
-   - Returns structured file lists
+   - Status: `DONE` / `NEEDS_CONTEXT`
 
 2. **Analyst-subagent** (`Analyst-subagent.agent.md`) - THE ARCHITECTURE EXPERT
    - Model: GPT-5.4
    - Deep architecture analysis
-   - Pattern identification
-   - Constraint documentation
-   - Strategic recommendations
+   - Design proposals (2-3 approaches with tradeoffs)
+   - Self-review checkpoint before reporting
+   - Status: All 4 codes
 
 3. **Builder-subagent** (`Builder-subagent.agent.md`) - THE TDD IMPLEMENTER
    - Model: Claude Sonnet 4.6
-   - Strict TDD workflow
-   - Test first, always
-   - Production-ready code
-   - Lint and format
+   - Strict TDD workflow with self-review checkpoint
+   - Structured debugging protocol (max 3 cycles)
+   - Mandatory evidence (actual test/lint output)
+   - Status: All 4 codes
 
 4. **Reviewer-subagent** (`Reviewer-subagent.agent.md`) - THE QUALITY GATEKEEPER
    - Model: GPT-5.4
-   - Code quality review
-   - Security audit
-   - Test coverage check
-   - APPROVED/NEEDS_REVISION/FAILED
+   - Three review modes: SPEC REVIEW / QUALITY REVIEW / FULL REVIEW
+   - Two-stage validation (spec compliance then code quality)
+   - Status: `DONE`→APPROVED / `DONE_WITH_CONCERNS`→NEEDS_REVISION / `BLOCKED`→FAILED
 
 5. **Tester-subagent** (`Tester-subagent.agent.md`) - THE VALIDATION SPECIALIST
    - Model: Claude Sonnet 4.6
-   - Test execution
-   - Coverage reporting
-   - Failure analysis
-   - Performance metrics
+   - Evidence verification step before reporting
+   - Mandatory evidence (actual test runner output)
+   - Status: All 4 codes
 
 ## 🚀 Installation
 
@@ -114,9 +115,10 @@ Simply invoke Nexus with your development task:
 Nexus will:
 1. Analyze the task
 2. Create execution plan
-3. Execute phases in parallel
-4. Validate results
-5. Report completion
+3. Design phase (complex tasks: Analyst proposes approaches)
+4. Execute implementation in parallel
+5. Two-stage validation (spec review, then quality review)
+6. Report completion
 
 **No further input needed** - it runs completely autonomously.
 
@@ -135,17 +137,26 @@ PHASE 1: RESEARCH (Parallel)
   
   Results: 12 files found, current auth = session-based
 
-PHASE 2: IMPLEMENTATION (Parallel)
+PHASE 2: DESIGN (Complex tasks only)
+  → Analyst: Propose approaches with tradeoffs
+  → Nexus: Select approach based on pattern alignment, risk, complexity
+
+  Results: Hybrid JWT approach selected (add alongside existing sessions)
+
+PHASE 3: IMPLEMENTATION (Parallel)
   → Builder: JWT generation with tests (TDD)
   → Builder: JWT validation with tests (TDD)
-  
-  Results: 2 files created, 15 tests written, all passing
 
-PHASE 3: VALIDATION (Parallel)
-  → Reviewer: Review JWT implementation
-  → Tester: Run all auth tests
-  
-  Results: APPROVED, 23/23 tests passing, 94% coverage
+  Results: DONE - 2 files created, 15 tests written, all passing (evidence attached)
+
+PHASE 4: VALIDATION (Two-Stage)
+  Stage 1 (parallel):
+    → Tester: Run all auth tests
+    → Reviewer: SPEC REVIEW - verify implementation matches requirements
+  Stage 2 (sequential):
+    → Reviewer: QUALITY REVIEW - code quality, security
+
+  Results: SPEC_PASS, APPROVED, 23/23 tests passing, 94% coverage
 
 ## EXECUTION COMPLETE ✅
 
@@ -235,13 +246,19 @@ Phase 1: Research
 ├─ Scout 3: Test files
 └─ Analyst: Architecture
 
-Phase 2: Implementation
+Phase 2: Design (complex tasks only)
+└─ Analyst: 2-3 approaches    ← Nexus selects best fit
+
+Phase 3: Implementation
 ├─ Builder 1: JWT generation  ← Run in parallel if independent
 └─ Builder 2: JWT validation
 
-Phase 3: Validation
-├─ Reviewer: Code quality     ← Always parallel
-└─ Tester: Test execution
+Phase 4: Validation (two-stage)
+├─ Stage 1 (parallel):
+│  ├─ Reviewer: Spec review   ← Does it match requirements?
+│  └─ Tester: Test execution
+└─ Stage 2 (sequential):
+   └─ Reviewer: Quality review ← Code quality, security
 ```
 
 **Performance**: 2-8x faster than sequential execution.
@@ -268,7 +285,17 @@ Phase 3: Validation
 
 **Zero user interaction** during execution.
 
-### 5. Production Ready
+### 5. Reliability Layer
+
+**Status-Based Escalation**: Subagents report structured statuses (`DONE`, `DONE_WITH_CONCERNS`, `NEEDS_CONTEXT`, `BLOCKED`) — Nexus routes each appropriately instead of binary pass/fail.
+
+**Evidence-Based Verification**: "Iron Law: Evidence Over Claims" — never accept "should work." Builder and Tester must attach actual command output. Reports without evidence trigger re-dispatch.
+
+**Self-Review Checkpoints**: Builder, Analyst, and Tester verify their own work before reporting (did I actually run it? does it match the requirement? any TODOs left?).
+
+**Structured Debugging**: Builder follows a 4-phase protocol (Investigate → Pattern Match → Hypothesize → Fix) with max 3 cycles before escalating as BLOCKED.
+
+### 6. Production Ready
 
 - ✅ Comprehensive error handling
 - ✅ Security audits
@@ -318,11 +345,21 @@ Analysts provide strategic recommendations:
   - Risks and mitigations
 ```
 
-### Phase 2: Implementation (Parallel where possible)
+### Phase 2: Design (Complex tasks only)
+
+```
+For complex tasks (4+ files, architectural changes):
+  Analyst proposes 2-3 approaches with tradeoffs
+  Nexus selects based on: pattern alignment, risk, complexity
+
+Skipped for simple tasks (1-3 files, clear path)
+```
+
+### Phase 3: Implementation (Parallel where possible)
 
 ```
 Nexus launches Builders based on independence:
-  Independent features → Parallel builders
+  Independent features → Parallel builders (1 feature per builder)
   Dependent features → Sequential builders
 
 Each Builder follows strict TDD:
@@ -331,29 +368,34 @@ Each Builder follows strict TDD:
   3. Write code (GREEN)
   4. Verify test passes
   5. Lint & format
+  5.5. Self-review (verify tests match requirements)
   6. Next feature
+
+Builder reports include mandatory evidence:
+  - Actual test output (not summaries)
+  - Actual lint output
 ```
 
-### Phase 3: Validation (Always Parallel)
+### Phase 4: Validation (Two-Stage)
 
 ```
-Nexus launches in parallel:
-  Reviewer: Quality audit
-  Tester: Test execution
+Stage 1 (parallel):
+  Reviewer: SPEC REVIEW - does implementation match requirements?
+  Tester: Run full test suite with evidence
 
-Reviewer checks:
-  ✓ Correctness
-  ✓ Test coverage
-  ✓ Code quality
-  ✓ Security
-  ✓ Performance
-  ✓ Maintainability
+  → If SPEC_FAIL: stop, report back
+  → If SPEC_PASS: proceed to Stage 2
 
-Tester validates:
-  ✓ All tests passing
-  ✓ Coverage metrics
-  ✓ Performance
-  ✓ No flaky tests
+Stage 2 (sequential):
+  Reviewer: QUALITY REVIEW
+    ✓ Correctness
+    ✓ Test coverage
+    ✓ Code quality
+    ✓ Security
+    ✓ Performance
+    ✓ Maintainability
+
+  → APPROVED / NEEDS_REVISION / FAILED
 ```
 
 ### Final Report
