@@ -78,7 +78,29 @@ A streamlined multi-agent orchestration system for VS Code Copilot that executes
 }
 ```
 
-### Installation Steps
+### Quick Install (Recommended)
+
+Run the installer script — it auto-detects your OS and VS Code variant:
+
+```bash
+# Clone the repository
+git clone https://github.com/nicholasgasior/nexus.git
+cd nexus
+
+# Install everything (VS Code agents + Claude Code skills)
+./install.sh
+
+# Or install selectively
+./install.sh --agents-only       # Only VS Code custom agents
+./install.sh --skills-only       # Only Claude Code skills
+./install.sh --vscode stable     # Target stable VS Code (default: auto-detect)
+./install.sh --dry-run            # Preview changes without installing
+./install.sh --uninstall          # Remove all installed agents and skills
+```
+
+Supports **macOS**, **Linux**, and **Windows** (Git Bash / WSL / MSYS2).
+
+### Manual Installation
 
 1. **Locate your VS Code prompts directory:**
 
@@ -91,14 +113,19 @@ A streamlined multi-agent orchestration system for VS Code Copilot that executes
 2. **Copy agent files:**
 
    ```bash
-   # Clone or download this repository
-   git clone <your-repo>
-   
-   # Copy agent files to prompts directory
    cp *.agent.md "/path/to/Code - Insiders/User/prompts/"
    ```
 
-3. **Reload VS Code:**
+3. **Symlink skills (for Claude Code):**
+
+   ```bash
+   mkdir -p ~/.claude/skills
+   for dir in skills/*/; do
+     ln -sf "$(pwd)/$dir" ~/.claude/skills/$(basename "$dir")
+   done
+   ```
+
+4. **Reload VS Code:**
 
    Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac) → "Developer: Reload Window"
 
@@ -577,6 +604,19 @@ Inspired by:
 - **Issues**: Open a GitHub issue
 - **Questions**: Check documentation in each `.agent.md` file
 - **Examples**: See Usage section above
+
+## 📜 Changelog
+
+### 2026-03-10
+
+- **Compress agent prompts by 74%** — Removed obvious LLM knowledge, kept only Nexus-specific procedures for optimal token efficiency (`31544fa`)
+- **Add universal skills/ directory** — Nexus as reusable skills across Claude Code, GitHub Copilot, and OpenAI Codex with optimized multi-agent orchestration (`0d643c9`)
+- **Add reliability layer** — Status-based escalation (4 codes), evidence gates, self-review checkpoints, and structured debugging protocol with max 3 cycles (`0df518f`)
+- **Update agent models** — Claude Sonnet 4.5 → 4.6, GPT-5.2 → 5.4 (`cd97209`)
+
+### 2026-02-03
+
+- **Initial commit** — Core multi-agent system with Nexus orchestrator, Scout, Analyst, Builder, Reviewer, and Tester sub-agents (`e9c199c`)
 
 ---
 
