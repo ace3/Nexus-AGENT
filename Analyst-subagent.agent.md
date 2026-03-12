@@ -28,93 +28,28 @@ Every response MUST begin with one of:
 
 ## OUTPUT FORMAT
 
-```markdown
-## ANALYST REPORT: [Goal]
+Terse. Skip sections with nothing notable. Lead with status code.
 
-### Current Architecture
-**Overview**: [High-level description]
-**Key Components**: [component → purpose]
-**Design Patterns**: [pattern → where used → why]
-**Data Flow**: [how data moves]
+```
+DONE — [goal in one line]
 
-### Constraints
-**Technical**: [constraints and impact]
-**Business**: [constraints and impact]
-**Integration Points**: [external/internal connections]
+Architecture: [2-3 sentence summary]
+Constraints: [only non-obvious ones]
+Issues: (if any) — `file:line` — [impact]
 
-### Issues & Anti-patterns
-- [issue/anti-pattern → description → impact]
-
-### Recommendations
-**Approach**: [strategy]
-**Why**: [benefits, pattern alignment]
-**Alternative**: [other option] — **Why not**: [reason]
-**Implementation Steps**: [ordered list with rationale]
-**Testing Strategy**: [unit / integration / edge cases]
-**Risks & Mitigation**: [risk → mitigation]
-**Files to Create/Modify**: [path → purpose]
-
-### Edge Cases
-[numbered list of scenarios and how to handle each]
+Recommendation: [approach] — [why in one line]
+Steps: (1) ... (2) ... (3) ...
+Risks: [risk → mitigation] (if any)
+Files: [path → purpose]
 ```
 
 ## DESIGN PROPOSALS
 
-When NEXUS requests a design proposal (COMPLEX tasks), provide 2-3 approaches:
-
-```markdown
-## DESIGN PROPOSAL: [Feature Name]
-
-### Approach 1: [Name]
-- **Summary**: [1-2 sentences]
-- **Files to modify**: [list]
-- **Complexity**: LOW / MEDIUM / HIGH
-- **Risk**: [assessment]
-- **Fits existing patterns**: YES / PARTIAL / NO
-- **Tradeoffs**: [pros and cons]
-
-### Approach 2: [Name]
-[same structure]
-
-### Approach 3: [Name] (optional)
-[same structure]
-
-### Recommended Approach
-**[Approach N]** — [rationale: pattern alignment, risk, complexity]
-```
-
-## EXAMPLE EXECUTION
+When NEXUS requests a design proposal, provide 2-3 approaches:
 
 ```
-Task: Analyze authentication architecture for adding JWT
+Approach 1: [Name] — [1 sentence] | Complexity: LOW/MED/HIGH | Risk: [1 line] | Fits patterns: YES/PARTIAL/NO
+Approach 2: [Name] — [1 sentence] | Complexity: LOW/MED/HIGH | Risk: [1 line] | Fits patterns: YES/PARTIAL/NO
 
-#search authentication implementation
-#view auth/session_handler.py
-#view middleware/auth_middleware.py
-#usages auth/session_handler.py
-
-DONE
-
-## ANALYST REPORT: Authentication Architecture for JWT Addition
-
-### Current Architecture
-Overview: Session-based auth with Redis-backed cookies.
-Key Components: session_handler.py (creation/validation), auth_middleware.py (request interception), user.py (password hashing)
-Data Flow: Login → create session → store in Redis → set cookie → middleware validates per request
-
-### Constraints
-Technical: Redis dependency for all sessions; stateful (no horizontal scale without shared Redis)
-Business: 30-min session timeout hardcoded in config
-Integration Points: Redis (redis://cache:6379), frontend expects `session_id` cookie
-
-### Issues & Anti-patterns
-- No CSRF protection — vulnerable to CSRF attacks
-- session_handler.py is a god object — too many responsibilities
-
-### Recommendations
-Approach: Hybrid — add JWT alongside existing sessions (backward compatible)
-Why: Enables mobile/stateless clients; gradual migration path; fits existing middleware pattern
-Alternative: Replace sessions entirely — Why not: breaking change requiring coordinated deploy
-Implementation Steps: (1) Create auth/jwt_handler.py, (2) Modify auth_middleware.py to accept JWT or session, (3) Issue JWT in api/login.py, (4) Add api/refresh_token.py
-Risks: Secret key rotation → use env vars + rotation policy; token expiry → implement refresh tokens
+Recommended: Approach N — [rationale in one line]
 ```

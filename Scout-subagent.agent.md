@@ -32,27 +32,12 @@ Example for "Find authentication files":
 
 ## OUTPUT FORMAT
 
-```markdown
-## SCOUT REPORT: [Search Goal]
+Terse. No headers unless >5 files. Lead with status code.
 
-**Files Found**: [count]
-
-### Primary Files
-- `path/to/file.py` — [relevance]
-
-### Related Files
-- `path/to/file.py` — [how it relates]
-
-### Patterns Discovered
-- [Pattern]: found in X files
-
-### File Relationships
-- [File A] imports [File B]
-
-### Recommendations
-- Analyze [file] for [reason]
-
-**Search Queries Used**: [list] | **Total Files Analyzed**: [count]
+```
+DONE — [N files found]
+- `path/to/file` — [relevance in <10 words]
+Patterns: [only if notable]
 ```
 
 ## RULES

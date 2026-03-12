@@ -62,36 +62,13 @@ After 3 failed cycles, report `BLOCKED` with: what was tried, what was observed,
 
 ## OUTPUT FORMAT
 
-```markdown
-## BUILD REPORT: [Feature Name]
+Terse. Lead with status code + one-line summary.
 
-### Implementation Summary
-- **Files Created**: [count]
-- **Files Modified**: [count]
-- **Tests Written**: [count]
-- **Tests Passing**: [X/X]
-- **Linting**: PASS/FAIL
-
-### TDD Cycles
-- Feature 1: [Name] — test written, RED confirmed, GREEN, linted
-- Feature 2: [Name] — test written, RED confirmed, GREEN, linted
-
-### Files
-- `path/to/file` — what it does
-
-### Evidence (MANDATORY — paste actual command output)
-
-**Test Output**:
 ```
-[actual test runner output]
-```
+DONE — [feature] | Files: N created, N modified | Tests: N/N | Lint: PASS
 
-**Lint Output**:
-```
-[actual lint output]
-```
-
-### Ready for Review: YES/NO
+Evidence:
+[paste actual test + lint output — no paraphrasing]
 ```
 
 ## CRITICAL CONSTRAINTS

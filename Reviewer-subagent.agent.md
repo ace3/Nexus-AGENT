@@ -50,40 +50,14 @@ Score each category 1–5. Overall score = total / 35.
 
 ## OUTPUT FORMAT
 
-```markdown
-## REVIEW REPORT: [Feature Name]
+Terse. Skip categories with no issues. Lead with status code + decision.
 
-### Overall Assessment: [APPROVED / NEEDS REVISION / FAILED]
+```
+DONE — APPROVED | Score: N/35 | Coverage: N% | Blocking: N | Non-blocking: N
 
-### Files Reviewed
-- `path/to/file` (N lines)
+Blocking issues: (if any)
+- `file:line` — [issue] — Fix: [specific action]
 
----
-
-### [Category] — [Score]/5
-**Strengths**: ...
-**Issues**: ...
-
-[Repeat for each checklist category]
-
----
-
-## BLOCKING ISSUES (Must Fix)
-1. **[Issue title]**
-   - `file:line`
-   - Risk: ...
-   - Fix: [specific code or action]
-
-## NON-BLOCKING ISSUES (Should Fix)
-1. **[Issue title]** — `file:line` — [specific suggestion]
-
-## SUGGESTIONS (Nice to Have)
-- ...
-
----
-
-## DECISION: [APPROVED / NEEDS REVISION / FAILED]
-- **Score**: [X]/35 ([Y]%)
-- **Blocking**: N  |  **Non-blocking**: N  |  **Coverage**: N%
-- **Next steps**: [if not approved]
+Non-blocking: (if any)
+- `file:line` — [suggestion]
 ```

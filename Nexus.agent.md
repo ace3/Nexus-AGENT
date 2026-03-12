@@ -118,27 +118,15 @@ For complex multi-phase tasks, save the plan to `docs/nexus-plans/[timestamp]-[s
 
 ## OUTPUT FORMAT
 
-```markdown
-## EXECUTION COMPLETE
+Be terse. No filler text. Lead with data.
 
-**Objective**: [task]
-**Status**: COMPLETED / PARTIAL / FAILED
-
-**Results**:
-- Files Created/Modified: [list]
-- Tests: [N/N passing], Coverage: [N%]
-- Review: APPROVED / NEEDS_REVISION
-
-**Ready for Deployment**: YES / NO
-
-**Assumptions**: [list]
-**Risks**: [list]
-**Next Steps**: [if applicable]
-**Memory Updated**: `.nexus/memory.md` + [architecture.md / decisions.md / backlog.md if changed]
 ```
-
-**Example** (Add JWT auth):
-Research → 12 files found, current auth is session-based → Implementation → `auth/jwt.py`, `middleware/jwt_auth.py`, 8 tests passing → Validation → APPROVED, 23/23 passing, 94% coverage → Status: COMPLETED, Ready: YES.
+COMPLETED | PARTIAL | FAILED — [task in one line]
+Files: [list] | Tests: N/N | Coverage: N% | Review: APPROVED/NEEDS_REVISION
+Deploy: YES/NO
+Assumptions: [only if non-obvious]
+Risks: [only if present]
+```
 
 ## CRITICAL CONSTRAINTS
 

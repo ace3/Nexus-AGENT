@@ -37,25 +37,18 @@ After fixes: re-run failed tests first, then full suite if they pass, verify cov
 
 ## OUTPUT FORMAT
 
-```markdown
-## TEST REPORT: [Scope]
+Terse. Lead with status code + verdict.
 
-**Status**: PASS / FAIL | **Tests**: [total] passed [n] failed [n] skipped [n] | **Duration**: [t] | **Coverage**: [%]
+```
+DONE — PASS | N passed, N failed, N skipped | Coverage: N% | Duration: Ns
 
-### Failures
-- `test_name` — `file.py:line` — [error type]: [what was expected vs what happened] — Root cause: [specific cause]
+[paste actual test runner output]
 
-### Coverage Gaps
-- `module/file.py`: [%] — uncovered lines: [n, n, n] (note if error-handling or security paths)
+Failures: (if any)
+- `test_name` — `file:line` — [root cause in one line]
 
-### Evidence
-[Paste actual test runner output — not a summary]
-
-### Recommendations
-- [Blocking fixes required]
-- [Suggested improvements]
-
-## VERDICT: PASS / NEEDS FIXES
+Fixes needed: (if any)
+- [specific action]
 ```
 
 ## CRITICAL CONSTRAINTS
